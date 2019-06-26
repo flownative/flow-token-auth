@@ -27,7 +27,7 @@ class HashTokenCommandController extends CommandController
 
     /**
      * Create a hash token to login with, authenticating the given roles.
-     * 
+     *
      * @param array $roleNames
      * @throws \Neos\Flow\Persistence\Exception\IllegalObjectTypeException
      */

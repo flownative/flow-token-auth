@@ -1,3 +1,9 @@
+Neos:
+  Flow:
+    aop:
+      globalObjects:
+        tokenInformer: Flownative\TokenAuthentication\Security\TokenInformer
+
 Flownative:
   TokenAuthentication:
     # Configure the authentication provider name for the HashTokenProvider here
