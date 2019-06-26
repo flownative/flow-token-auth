@@ -1,0 +1,22 @@
+{
+    "name": "flownative/token-authentication",
+    "type": "neos-package",
+    "description": "General purpose token authentication.",
+    "homepage": "http://github.com/flownative/flow-token-auth",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christian Müller",
+            "homepage": "http://about.me/kitsunet"
+        }
+    ],
+    "require": {
+        "ext-json": "*",
+        "neos/flow": "^4.3.0 || ^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Flownative\\TokenAuthentication\\": "Classes/"
+        }
+    }
+}

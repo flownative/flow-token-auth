@@ -1,0 +1,4 @@
+Flownative:
+  TokenAuthentication:
+    # Configure the authentication provider name for the HashTokenProvider here
+    authenticationProviderName: 'tokenAuthenticator'
