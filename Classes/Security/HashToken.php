@@ -3,12 +3,11 @@ namespace Flownative\TokenAuthentication\Security;
 
 use Neos\Flow\Mvc\ActionRequest;
 use Neos\Flow\Security\Authentication\Token\AbstractToken;
-use Neos\Flow\Security\Authentication\Token\SessionlessTokenInterface;
 
 /**
  * A Flow security token that authenticates based on a hash delivered via GET request.
  */
-class HashToken extends AbstractToken implements SessionlessTokenInterface
+class HashToken extends AbstractToken
 {
     /**
      * @var array
