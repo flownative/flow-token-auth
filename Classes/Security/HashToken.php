@@ -24,14 +24,20 @@ class HashToken extends AbstractToken
         if ($actionRequest->getHttpRequest()->getMethod() !== 'GET') {
             return;
         }
-
         $authenticationHashToken = $actionRequest->getHttpRequest()->getArgument('_authenticationHashToken');
 
         if (!$authenticationHashToken) {
-            return;
+            $authorizationHeader = $actionRequest->getHttpRequest()->getHeader('Authorization');
+            if ($authorizationHeader) {
+                $authenticationHashToken = str_replace('Bearer ', '', $authorizationHeader);
+            }
         }
 
-        $this->credentials['password'] = $authenticationHashToken;
-        $this->setAuthenticationStatus(self::AUTHENTICATION_NEEDED);
+        if ($authenticationHashToken) {
+            $this->credentials['password'] = $authenticationHashToken;
+            $this->setAuthenticationStatus(self::AUTHENTICATION_NEEDED);
+        }
+
+        return false;
     }
 }
