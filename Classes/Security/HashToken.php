@@ -3,9 +3,10 @@ namespace Flownative\TokenAuthentication\Security;
 
 use Neos\Flow\Mvc\ActionRequest;
 use Neos\Flow\Security\Authentication\Token\AbstractToken;
+use Neos\Flow\Security\Exception\InvalidAuthenticationStatusException;
 
 /**
- * A Flow security token that authenticates based on a hash delivered via GET request.
+ * A Flow security token that authenticates based on a hash delivered.
  */
 class HashToken extends AbstractToken
 {
@@ -16,14 +17,11 @@ class HashToken extends AbstractToken
 
     /**
      * @param ActionRequest $actionRequest
-     * @return bool|void
-     * @throws \Neos\Flow\Security\Exception\InvalidAuthenticationStatusException
+     * @return bool
+     * @throws InvalidAuthenticationStatusException
      */
-    public function updateCredentials(ActionRequest $actionRequest)
+    public function updateCredentials(ActionRequest $actionRequest): bool
     {
-        if ($actionRequest->getHttpRequest()->getMethod() !== 'GET') {
-            return;
-        }
         $authenticationHashToken = $actionRequest->getHttpRequest()->getArgument('_authenticationHashToken');
 
         if (!$authenticationHashToken) {
