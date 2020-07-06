@@ -25,7 +25,7 @@ class HashToken extends AbstractToken
             return;
         }
 
-        $authenticationHashToken = $actionRequest->getHttpRequest()->getArgument('_authenticationHashToken');
+        $authenticationHashToken = $actionRequest->getHttpRequest()->getQueryParams()['_authenticationHashToken'] ?? null;
 
         if (!$authenticationHashToken) {
             return;
