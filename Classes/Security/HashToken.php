@@ -20,7 +20,7 @@ class HashToken extends AbstractToken
      * @return bool
      * @throws InvalidAuthenticationStatusException
      */
-    public function updateCredentials(ActionRequest $actionRequest): bool
+    public function updateCredentials(ActionRequest $actionRequest)
     {
         $authenticationHashToken = $actionRequest->getHttpRequest()->getArgument('_authenticationHashToken');
 
