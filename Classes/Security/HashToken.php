@@ -22,7 +22,7 @@ class HashToken extends AbstractToken
      */
     public function updateCredentials(ActionRequest $actionRequest)
     {
-        $authenticationHashToken = $actionRequest->getHttpRequest()->getArgument('_authenticationHashToken');
+        $authenticationHashToken = $actionRequest->getHttpRequest()->getQueryParams()['_authenticationHashToken'] ?? null;
 
         if (!$authenticationHashToken) {
             $authorizationHeader = $actionRequest->getHttpRequest()->getHeader('Authorization');
