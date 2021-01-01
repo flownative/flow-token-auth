@@ -3,6 +3,7 @@ namespace Flownative\TokenAuthentication\Security;
 
 use Neos\Flow\Mvc\ActionRequest;
 use Neos\Flow\Security\Authentication\Token\AbstractToken;
+use Neos\Flow\Security\Authentication\Token\SessionlessTokenInterface;
 use Neos\Flow\Security\Exception\InvalidAuthenticationStatusException;
 
 /**
