@@ -8,7 +8,7 @@ use Neos\Flow\Security\Exception\InvalidAuthenticationStatusException;
 /**
  * A Flow security token that authenticates based on a hash delivered.
  */
-class HashToken extends AbstractToken
+class HashToken extends AbstractToken implements SessionlessTokenInterface
 {
     /**
      * @var array
