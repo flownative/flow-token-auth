@@ -1,47 +1,12 @@
 <?php
 namespace Flownative\TokenAuthentication\Security;
 
-use Neos\Flow\Mvc\ActionRequest;
-use Neos\Flow\Security\Authentication\Token\AbstractToken;
 use Neos\Flow\Security\Authentication\Token\SessionlessTokenInterface;
-use Neos\Flow\Security\Exception\InvalidAuthenticationStatusException;
 
 /**
- * A Flow security token that authenticates based on a hash delivered.
+ * A Flow security token that authenticates based on a hash delivered
+ * without starting a session.
  */
-class HashToken extends AbstractToken implements SessionlessTokenInterface
+class HashToken extends SessionStartingHashToken implements SessionlessTokenInterface
 {
-    /**
-     * @var array
-     */
-    protected $credentials;
-
-    /**
-     * @param ActionRequest $actionRequest
-     * @return bool
-     * @throws InvalidAuthenticationStatusException
-     */
-    public function updateCredentials(ActionRequest $actionRequest)
-    {
-        $authenticationHashToken = $actionRequest->getHttpRequest()->getQueryParams()['_authenticationHashToken'] ?? null;
-
-        if (!$authenticationHashToken) {
-            $authorizationHeaders = $actionRequest->getHttpRequest()->getHeader('Authorization');
-            if (!empty($authorizationHeaders)) {
-                foreach ($authorizationHeaders as $authorizationHeader) {
-                    if (strpos($authorizationHeader, 'Bearer ') === 0) {
-                        $authenticationHashToken = str_replace('Bearer ', '', $authorizationHeader);
-                        break;
-                    }
-                }
-            }
-        }
-
-        if ($authenticationHashToken) {
-            $this->credentials['password'] = $authenticationHashToken;
-            $this->setAuthenticationStatus(self::AUTHENTICATION_NEEDED);
-        }
-
-        return false;
-    }
 }

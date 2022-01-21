@@ -32,7 +32,7 @@ class HashTokenProvider extends AbstractProvider
      */
     public function getTokenClassNames(): array
     {
-        return [HashToken::class];
+        return [HashToken::class, SessionStartingHashToken::class];
     }
 
     /**
@@ -40,7 +40,7 @@ class HashTokenProvider extends AbstractProvider
      */
     public function authenticate(TokenInterface $authenticationToken)
     {
-        if (!($authenticationToken instanceof HashToken)) {
+        if (!($authenticationToken instanceof SessionStartingHashToken) && !($authenticationToken instanceof HashToken)) {
             throw new UnsupportedAuthenticationTokenException('This provider cannot authenticate the given token.', 1547118072);
         }
 
