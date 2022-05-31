@@ -26,9 +26,14 @@ class SessionStartingHashToken extends AbstractToken
         $authenticationHashToken = $actionRequest->getHttpRequest()->getQueryParams()['_authenticationHashToken'] ?? null;
 
         if (!$authenticationHashToken) {
-            $authorizationHeader = $actionRequest->getHttpRequest()->getHeader('Authorization');
-            if ($authorizationHeader) {
-                $authenticationHashToken = str_replace('Bearer ', '', $authorizationHeader);
+            $authorizationHeaders = $actionRequest->getHttpRequest()->getHeader('Authorization');
+            if (!empty($authorizationHeaders)) {
+                foreach ($authorizationHeaders as $authorizationHeader) {
+                    if (strpos($authorizationHeader, 'Bearer ') === 0) {
+                        $authenticationHashToken = str_replace('Bearer ', '', $authorizationHeader);
+                        break;
+                    }
+                }
             }
         }
 
