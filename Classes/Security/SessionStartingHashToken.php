@@ -18,30 +18,23 @@ class SessionStartingHashToken extends AbstractToken
 
     /**
      * @param ActionRequest $actionRequest
-     * @return bool
+     * @return void
      * @throws InvalidAuthenticationStatusException
      */
     public function updateCredentials(ActionRequest $actionRequest)
     {
         $authenticationHashToken = $actionRequest->getHttpRequest()->getQueryParams()['_authenticationHashToken'] ?? null;
 
-        if (!$authenticationHashToken) {
-            $authorizationHeaders = $actionRequest->getHttpRequest()->getHeader('Authorization');
-            if (!empty($authorizationHeaders)) {
-                foreach ($authorizationHeaders as $authorizationHeader) {
-                    if (strpos($authorizationHeader, 'Bearer ') === 0) {
-                        $authenticationHashToken = str_replace('Bearer ', '', $authorizationHeader);
-                        break;
-                    }
-                }
+        if ($authenticationHashToken === null) {
+            $authorizationHeader = $actionRequest->getHttpRequest()->getHeaderLine('Authorization');
+            if (strncmp($authorizationHeader, 'Bearer ', 7) === 0) {
+                $authenticationHashToken = substr($authorizationHeader, 7);
             }
         }
 
-        if ($authenticationHashToken) {
+        if ($authenticationHashToken !== null) {
             $this->credentials['password'] = $authenticationHashToken;
             $this->setAuthenticationStatus(self::AUTHENTICATION_NEEDED);
         }
-
-        return false;
     }
 }
