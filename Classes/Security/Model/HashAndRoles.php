@@ -65,8 +65,8 @@ class HashAndRoles
         string $hash,
         array $roles,
         array $settings = [],
-        string $label = null,
-        \DateTime $expiresAt = null
+        ?string $label = null,
+        ?\DateTime $expiresAt = null
     ): HashAndRoles
     {
         $instance = new static();
@@ -154,6 +154,13 @@ class HashAndRoles
     public function getLabel(): ?string
     {
         return $this->label;
+    }
+
+    public function setLabel(string $label): self
+    {
+        $this->label = $label;
+
+        return $this;
     }
 
     public function getCreatedAt(): \DateTime
