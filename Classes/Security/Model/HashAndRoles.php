@@ -65,8 +65,8 @@ class HashAndRoles
         string $hash,
         array $roles,
         array $settings = [],
-        string $label = null,
-        \DateTime $expiresAt = null
+        ?string $label = null,
+        ?\DateTime $expiresAt = null
     ): HashAndRoles
     {
         $instance = new static();
